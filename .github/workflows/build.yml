@@ -1,0 +1,69 @@
+name: Build Solus Packages
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [brightnessctl, gdu, mpvpaper, noctalia-qs, wlsunset]
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup solbuild
+        run: |
+          # Instalar dependencias del sistema
+          sudo apt-get update
+          sudo apt-get install -y p7zip-full libarchive-tools curl git
+          
+          # Descargar e instalar solbuild
+          curl -L https://github.com/getsolus/solbuild/releases/latest/download/solbuild -o solbuild
+          chmod +x solbuild
+          sudo mv solbuild /usr/bin/solbuild
+          
+          # Configurar el empaquetador (obligatorio para compilar)
+          mkdir -p ~/.config/solus
+          echo "[Packager]" > ~/.config/solus/packager
+          echo "Name=Dinimixis DEMZ" >> ~/.config/solus/packager
+          echo "Email=dinimixis@github.com" >> ~/.config/solus/packager
+          # Pasarlo también a /root para cuando se use sudo
+          sudo mkdir -p /root/.config/solus
+          sudo cp ~/.config/solus/packager /root/.config/solus/packager
+          
+          # Crear directorios de configuración de solbuild
+          sudo mkdir -p /etc/solbuild
+          
+          # Crear el perfil main-x86_64 manualmente para evitar errores de red
+          # Esto le dice a solbuild de dónde bajar la imagen base
+          cat <<EOF | sudo tee /etc/solbuild/main-x86_64.profile
+          [Profile]
+          Name=main-x86_64
+          Image=https://sources.getsol.us/solbuild/main-x86_64.tar.xz
+          EOF
+          
+          # Inicializar y actualizar la imagen base (esto tarda unos minutos)
+          sudo solbuild init -p main-x86_64 -auto
+          sudo solbuild update -p main-x86_64
+
+      - name: Build Package
+        working-directory: ${{ matrix.package }}
+        run: |
+          # Compilar el paquete
+          sudo solbuild build package.yml -p main-x86_64
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.package }}-binary
+          path: |
+            ${{ matrix.package }}/*.eopkg
+            ${{ matrix.package }}/*.pspec.xml
