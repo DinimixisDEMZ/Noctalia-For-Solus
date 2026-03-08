@@ -1,4 +1,5 @@
 # 📦 Custom Solus Repository For Noctalia Support
+###### [Ver Traducción al español](https://github.com/DinimixisDEMZ/Noctalia-For-Solus/blob/master/README.es.md)
 ### Experimental & Personal Package Collection
 
 [![Solus](https://img.shields.io/badge/OS-Solus-blue?style=flat-square&logo=solus&logoColor=white)](https://getsol.us/)
