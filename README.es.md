@@ -1,5 +1,5 @@
-# 📦 Noctalia para Solus
-### Colección de paquetes experimentales y personales
+# 📦 Repositorio Personalizado para Noctalia en Solus
+### Colección de paquetes para uso experimental y personal
 
 [![Solus](https://img.shields.io/badge/OS-Solus-blue?style=flat-square&logo=solus&logoColor=white)](https://getsol.us/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
@@ -20,9 +20,9 @@ Para instalar los paquetes manualmente, descarga el archivo `.eopkg` y ejecuta:
 sudo eopkg it ./nombre-del-paquete.eopkg
 ```
 
-## Construir | Generar EOPKG Manualmente
+## Construcción | Generar EOPKG Manualmente
 - **Clonar** el repositorio: `git clone https://github.com/DinimixisDEMZ/Noctalia-For-Solus`
 - **Dirigirse** al "directorio" ej: `cd noctalia-qs`
 - **Construir** con **solbuild**: `sudo solbuild package.yml`
-- Luego **instalar** el .eopkg generado, ej: `sudo eopkg it ./noctalia-qs-0.0.5-1-1-x86_64.eopkg`
+- Luego **instalar** el **.eopkg** generado, ej: `sudo eopkg it ./noctalia-qs-0.0.5-1-1-x86_64.eopkg`
 
