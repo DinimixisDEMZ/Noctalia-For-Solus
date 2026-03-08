@@ -2,7 +2,7 @@ name       : noctalia-qs
 version    : 0.0.6
 release    : 2
 source     :
-    - https://github.com/noctalia-dev/noctalia-qs/archive/refs/tags/v0.0.6.tar.gz : 723eb4e7214252ed475264a21e41688efa9751b387b2d2f3300862445d510b46
+    - https://github.com/noctalia-dev/noctalia-qs/archive/refs/tags/v0.0.6.tar.gz : d8cc89ed32a723f845e2cd5d452949ccd21f2d9bd047712ed296ed5dd267d3bd
 homepage   : https://github.com/noctalia-dev/noctalia-qs
 license    : LGPL-3.0-only
 component  : desktop.wayland
