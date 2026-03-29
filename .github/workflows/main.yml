@@ -18,3 +18,33 @@ jobs:
 
     - name: setup-solbuild
       uses: GZGavinZhao/setup-solbuild@v1.1
+      with:
+        packager: "DinimixisDEMZ"
+        
+    - name: Set build environment
+      shell: bash
+      run: |
+        echo "PACKAGE=${{ github.event.inputs.PACKAGE }}" >> $GITHUB_ENV
+
+    - name: Install required packages
+      run: |
+        sudo apt install -y \
+          python3 python3-pip git golang
+
+        chmod +x ./release.sh
+
+    - name: Build package
+      shell: bash
+      run: |
+        cd "$(pwd)/Noctalia-For-Solus/$PACKAGE"
+        sudo solbuild build package.yml
+
+    - name: Create release
+      env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+      run: |
+        bash ./release.sh
+
+    - name: Cleanup
+      run: |
+        sudo rm -rf *
