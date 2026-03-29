@@ -1,13 +1,16 @@
 #!/bin/bash
 
 # Configuration of paths
-SOURCE="/home/build/work"
+SOURCE="/home/build/work/"
 DEST="$(pwd)/Noctalia-For-Solus/Releases"
 
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 
 echo "Searching for packages in $SOURCE..."
+
+# Debug
+ls -l "$SOURCE"
 
 if [ -d "$SOURCE" ]; then
 
@@ -18,8 +21,6 @@ if [ -d "$SOURCE" ]; then
         cp "$SOURCE"/*.eopkg "$DEST/"
         echo "✅ Files copied to $DEST"
         
-        # Debug
-        ls -l "$DEST"
     else
         echo "❌ No se encontraron archivos .eopkg en $SOURCE"
         exit 1
