@@ -28,7 +28,6 @@ jobs:
 
         chmod +x ./release.sh
 
-
     - name: Build package
       shell: bash
       run: |
@@ -36,11 +35,24 @@ jobs:
         cd "$(pwd)/$PACKAGE"
         sudo solbuild build package.yml
 
-    - name: Create release
-      env:
-          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+    - name: Prepare release
       run: |
         bash ./release.sh
+
+    - name: Uploading files to GitHub Release.
+      uses: softprops/action-gh-release@v2.6.1
+      env:
+          GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+      with:
+        tag_name: "build-${{ github.run_id }}"
+        name: "${{ github.event.inputs.PACKAGE }} Build: ${{ github.run_id }}"
+        body: |
+            ***Build Information***
+            - ➡️ Package: ${{ github.event.inputs.PACKAGE }}
+            - ➡️ Size: ${{ env.SIZE }}
+            - ➡️ MD5: ${{ env.MD5 }}
+        files: |
+          Releases/*
 
     - name: Cleanup
       run: |

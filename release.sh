@@ -5,7 +5,7 @@ mkdir -p "$(pwd)/Releases"
 DEST="$(pwd)/Releases"
 
 TAG_NAME="Dini-$(date +%s)"
-RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
+RELEASE_NAME="$PACKAGE-$(date +%s)"
 
 PACKAGE_PATH=$(find . -maxdepth 2 -name "*.eopkg" -print -quit)
 
@@ -25,43 +25,9 @@ else
     exit 0
 fi
 
-SIZE=$(du -h "$DEST/$PACKAGE_FILE" | cut -f1)
-MD5=$(md5sum "$DEST/$PACKAGE_FILE" | cut -d' ' -f1)
+SIZE=$(du -h "$DEST/$PACKAGE_FILE" | cut -f1) >> $GITHUB_ENV
+MD5=$(md5sum "$DEST/$PACKAGE_FILE" | cut -d' ' -f1) >> $GITHUB_ENV
 
 echo "Info: Size $SIZE, MD5 $MD5"
 echo "File detected: $PACKAGE_FILE"
 cd "$(pwd)/Releases/"
-
-# Release body
-RELEASE_BODY="#### 🌎 Download:
-$PACKAGE_FILE
-
-#### 📊 File Info:
-• Size: $FILE_SIZE
-• MD5: $MD5_SUM
-"
-
-# Convert to JSON-safe string
-JSON_BODY=$(printf '%s' "$RELEASE_BODY" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
-
-# Create release
-if [ -z "$PACKAGE_FILE" ]; then
-    echo "There is no .eopkg file in Releases. Skipping release."
-    exit 0
-elif [ -z "$GIT_TOKEN" ]; then
-    echo "GIT_TOKEN not found. Skipping release."
-    exit 0
-else
-    echo "Package detected: $PACKAGE_FILE. Proceeding to create release..."
-
-  curl -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases" \
-    -H "Authorization: token $GIT_TOKEN" \
-    -H "Content-Type: application/json" \
-    -d "{
-      \"tag_name\": \"$TAG_NAME\",
-      \"name\": \"$RELEASE_NAME\",
-      \"body\": $JSON_BODY,
-      \"draft\": false,
-      \"prerelease\": false
-    }"
-fi
