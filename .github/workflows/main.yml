@@ -26,13 +26,9 @@ jobs:
       run: |
         echo "PACKAGE=${{ github.event.inputs.PACKAGE }}" >> $GITHUB_ENV
 
-    - name: Install required packages
-      run: |
-        sudo apt install -y \
-          python3 python3-pip git golang bzr
-
         chmod +x ./release.sh
 
+        
     - name: Build package
       shell: bash
       run: |
