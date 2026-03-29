@@ -7,7 +7,7 @@ DEST="$(pwd)/Noctalia-For-Solus/Releases"
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 
-cp "./"*.eopkg "$DEST/"
+find . -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
 echo "File copied to $DEST"
 
 PACKAGE_FILE=$(basename "$(ls "$(pwd)/Noctalia-For-Solus/Releases/"*.eopkg)")
