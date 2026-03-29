@@ -43,7 +43,7 @@ jobs:
       env:
           GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
-        bash ./release.sh
+        sudo bash ./release.sh
 
     - name: Cleanup
       run: |

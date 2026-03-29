@@ -7,29 +7,29 @@ DEST="$(pwd)/Noctalia-For-Solus/Releases"
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 
-# Check if solbuild directory exists
-if [[ -d "$SOURCE" ]]; then
-    
-    # Search for .eopkg files
-    shopt -s nullglob
-    files=("$SOURCE"/*.eopkg)
-    
-    if (( ${#files[@]} > 0 )); then
-        # Make sure the destination exists
+echo "Searching for packages in $SOURCE..."
+
+if [ -d "$SOURCE" ]; then
+
+    FILES=$(find "$SOURCE" -maxdepth 1 -name "*.eopkg")
+
+    if [ -n "$FILES" ]; then
         mkdir -p "$DEST"
+        cp "$SOURCE"/*.eopkg "$DEST/"
+        echo "✅ Files copied to $DEST"
         
-        # Move the files
-        mv "$SOURCE"/*.eopkg "$DEST/"
-        
-        echo "${#files[@]} have been moved to $DEST"
+        # Debug
+        ls -l "$DEST"
     else
-        echo "No .eopkg files found in $SOURCE"
+        echo "❌ No se encontraron archivos .eopkg en $SOURCE"
+        exit 1
     fi
 else
-    echo "Error: Route hasn't been detected: ($SOURCE)."
+    echo "❌ Error: La ruta $SOURCE no existe en este entorno."
+    exit 1
 fi
 
-PACKAGE_FILE="$(pwd)/Noctalia-For-Solus/Releases/*.eopkg"
+PACKAGE_FILE="$(pwd)/Noctalia-For-Solus/Releases"/*.eopkg
 FILE_SIZE=$(du -h "$PACKAGE_FILE" | cut -f1)
 MD5_SUM=$(md5sum "$PACKAGE_FILE" | awk '{print $1}')
 
