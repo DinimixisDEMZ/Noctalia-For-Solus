@@ -7,17 +7,25 @@ DEST="$(pwd)/Releases"
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 
-find . -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
-echo "File copied to $DEST"
+FILES=$(find . -maxdepth 1 -name "*.eopkg" -print -quit)
 
-pkgs=("$(pwd)/Releases/"*.eopkg)
-
-if [ -e "${pkgs[0]}" ]; then
-    PACKAGE_FILE=$(basename "${pkgs[0]}")
-    echo "Paquete detectado: $PACKAGE_FILE"
+if [ -n "$FILES" ]; then
+    find . -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
+    echo "File(s) copied to $DEST"
 else
-    echo "No se encontraron archivos .eopkg en la carpeta Releases."
+    echo "No .eopkg files found to copy. Skipping..."
 fi
+
+for file in "$(pwd)/Releases/"*.eopkg; do
+    if [ -e "$file" ]; then
+        PACKAGE_FILE=$(basename "$file")
+        echo "Package detected: $PACKAGE_FILE"
+        break
+    else
+        echo "There is no .eopkg file in Releases."
+        PACKAGE_FILE=""
+    fi
+done
 
 echo "File detected: $PACKAGE_FILE"
 cd "$(pwd)/Releases/"
@@ -38,8 +46,14 @@ $PACKAGE_FILE
 JSON_BODY=$(printf '%s' "$RELEASE_BODY" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
 
 # Create release
-if [ -n "$GIT_TOKEN" ]; then
-  echo "Creating GitHub release..."
+if [ -z "$PACKAGE_FILE" ]; then
+    echo "There is no .eopkg file in Releases. Skipping release."
+    exit 0
+elif [ -z "$GIT_TOKEN" ]; then
+    echo "GIT_TOKEN not found. Skipping release."
+    exit 0
+else
+    echo "Package detected: $PACKAGE_FILE. Proceeding to create release..."
 
   curl -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases" \
     -H "Authorization: token $GIT_TOKEN" \
