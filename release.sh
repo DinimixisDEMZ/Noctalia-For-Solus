@@ -7,31 +7,30 @@ DEST="$(pwd)/Releases"
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 
-FILES=$(find /home/runner -maxdepth 1 -name "*.eopkg" -print -quit)
+PACKAGE_PATH=$(find . -maxdepth 2 -name "*.eopkg" -print -quit)
 
-if [ -n "$FILES" ]; then
-    find /home/runner -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
-    echo "File(s) copied to $DEST"
+if [ -n "$PACKAGE_PATH" ]; then
+    PACKAGE_FILE=$(basename "$PACKAGE_PATH")
+    echo "✅ Package detected: $PACKAGE_FILE in the path $PACKAGE_PATH"
+    
+    DEST="./Releases"
+    mkdir -p "$DEST"
+    
+    if [ "$PACKAGE_PATH" != "$DEST/$PACKAGE_FILE" ]; then
+        cp "$PACKAGE_PATH" "$DEST/"
+        echo "File copied to $DEST"
+    fi
 else
-    echo "No .eopkg files found to copy. Skipping..."
+    echo "❌ No .eopkg file found. Aborting release."
+    exit 0
 fi
 
-for file in "$(pwd)/Releases/"*.eopkg; do
-    if [ -e "$file" ]; then
-        PACKAGE_FILE=$(basename "$file")
-        echo "Package detected: $PACKAGE_FILE"
-        break
-    else
-        echo "There is no .eopkg file in Releases."
-        PACKAGE_FILE=""
-    fi
-done
+SIZE=$(du -h "$DEST/$PACKAGE_FILE" | cut -f1)
+MD5=$(md5sum "$DEST/$PACKAGE_FILE" | cut -d' ' -f1)
 
+echo "Info: Size $SIZE, MD5 $MD5"
 echo "File detected: $PACKAGE_FILE"
 cd "$(pwd)/Releases/"
-
-FILE_SIZE=$(du -h "$PACKAGE_FILE" | cut -f1)
-MD5_SUM=$(md5sum "$PACKAGE_FILE" | awk '{print $1}')
 
 # Release body
 RELEASE_BODY="#### 🌎 Download:
@@ -65,3 +64,4 @@ else
       \"draft\": false,
       \"prerelease\": false
     }"
+fi
