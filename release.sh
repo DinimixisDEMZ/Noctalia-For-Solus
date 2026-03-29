@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration of paths
-mkdir -p "$(pwd)/Noctalia-For-Solus/Releases"
-DEST="$(pwd)/Noctalia-For-Solus/Releases"
+mkdir -p "$(pwd)/Releases"
+DEST="$(pwd)/Releases"
 
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
@@ -10,9 +10,17 @@ RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 find . -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
 echo "File copied to $DEST"
 
-PACKAGE_FILE=$(basename "$(ls "$(pwd)/Noctalia-For-Solus/Releases/"*.eopkg)")
+pkgs=("$(pwd)/Releases/"*.eopkg)
+
+if [ -e "${pkgs[0]}" ]; then
+    PACKAGE_FILE=$(basename "${pkgs[0]}")
+    echo "Paquete detectado: $PACKAGE_FILE"
+else
+    echo "No se encontraron archivos .eopkg en la carpeta Releases."
+fi
+
 echo "File detected: $PACKAGE_FILE"
-cd "$(pwd)/Noctalia-For-Solus/Releases/"
+cd "$(pwd)/Releases/"
 
 FILE_SIZE=$(du -h "$PACKAGE_FILE" | cut -f1)
 MD5_SUM=$(md5sum "$PACKAGE_FILE" | awk '{print $1}')
