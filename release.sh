@@ -7,10 +7,10 @@ DEST="$(pwd)/Releases"
 TAG_NAME="Dini-$(date +%s)"
 RELEASE_NAME="DinimixisDEMZ-$(date +%s)"
 
-FILES=$(find . -maxdepth 1 -name "*.eopkg" -print -quit)
+FILES=$(find /home/runner -maxdepth 1 -name "*.eopkg" -print -quit)
 
 if [ -n "$FILES" ]; then
-    find . -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
+    find /home/runner -maxdepth 1 -name "*.eopkg" -exec cp -t "$DEST/" {} +
     echo "File(s) copied to $DEST"
 else
     echo "No .eopkg files found to copy. Skipping..."
@@ -65,6 +65,3 @@ else
       \"draft\": false,
       \"prerelease\": false
     }"
-else
-  echo "GIT_TOKEN not found. Skipping release."
-fi
