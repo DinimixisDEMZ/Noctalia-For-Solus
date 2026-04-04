@@ -33,9 +33,9 @@ Noctalia, such as ext-background-effect-v1 support.
         </Files>
     </Package>
     <History>
-        <Update release="7">
-            <Date>2026-03-31</Date>
-            <Version>0.0.11</Version>
+        <Update release="8">
+            <Date>2026-04-04</Date>
+            <Version>0.0.12</Version>
             <Comment>Packaging update</Comment>
             <Name>DinimixisDEMZ</Name>
             <Email>dinimixis@vivaldi.net</Email>

@@ -361,6 +361,10 @@ libQt6Core.so.6:_ZN8QVariant4dataEv
 libQt6Core.so.6:_ZN8QVariant7convertE9QMetaType
 libQt6Core.so.6:_ZN8QVariantC1E5QRect
 libQt6Core.so.6:_ZN8QVariantC1E9QMetaTypePKv
+libQt6Core.so.6:_ZN8QVariantC1ERK10QByteArray
+libQt6Core.so.6:_ZN8QVariantC1ERK4QMapI7QStringS_E
+libQt6Core.so.6:_ZN8QVariantC1ERK5QListI7QStringE
+libQt6Core.so.6:_ZN8QVariantC1ERK5QListIS_E
 libQt6Core.so.6:_ZN8QVariantC1ERK7QString
 libQt6Core.so.6:_ZN8QVariantC1ERKS_
 libQt6Core.so.6:_ZN8QVariantC1Eb
@@ -441,6 +445,7 @@ libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI12QEasingCurveE8metaTyp
 libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI4QMapI7QString8QVariantEE8metaTypeE
 libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI4QUrlE8metaTypeE
 libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI5QHashI7QString8QVariantEE8metaTypeE
+libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI5QListI10QByteArrayEE8metaTypeE
 libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI5QListI7QStringEE8metaTypeE
 libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI5QListI8QVariantEE8metaTypeE
 libQt6Core.so.6:_ZN9QtPrivate25QMetaTypeInterfaceWrapperI5QRectE8metaTypeE
@@ -614,6 +619,8 @@ libQt6Core.so.6:_ZNK7QString8repeatedEx
 libQt6Core.so.6:_ZNK7QString8toDoubleEPb
 libQt6Core.so.6:_ZNK7QThread10metaObjectEv
 libQt6Core.so.6:_ZNK8QProcess9processIdEv
+libQt6Core.so.6:_ZNK8QVariant11toByteArrayEv
+libQt6Core.so.6:_ZNK8QVariant11toULongLongEPb
 libQt6Core.so.6:_ZNK8QVariant12qdebugHelperE6QDebug
 libQt6Core.so.6:_ZNK8QVariant5toIntEPb
 libQt6Core.so.6:_ZNK8QVariant5toMapEv
@@ -621,6 +628,7 @@ libQt6Core.so.6:_ZNK8QVariant6equalsERKS_
 libQt6Core.so.6:_ZNK8QVariant6isNullEv
 libQt6Core.so.6:_ZNK8QVariant6toBoolEv
 libQt6Core.so.6:_ZNK8QVariant6toListEv
+libQt6Core.so.6:_ZNK8QVariant8toDoubleEPb
 libQt6Core.so.6:_ZNK8QVariant8toStringEv
 libQt6Core.so.6:_ZNK9QDateTime16toSecsSinceEpochEv
 libQt6Core.so.6:_ZNK9QDateTime17toMSecsSinceEpochEv
@@ -710,6 +718,7 @@ libQt6DBus.so.6:_ZN13QDBusArgumentlsERK5QListI7QStringE
 libQt6DBus.so.6:_ZN13QDBusArgumentlsERK7QString
 libQt6DBus.so.6:_ZN13QDBusArgumentlsEb
 libQt6DBus.so.6:_ZN13QDBusArgumentlsEi
+libQt6DBus.so.6:_ZN13QDBusArgumentlsEj
 libQt6DBus.so.6:_ZN13QDBusMetaType10demarshallERK13QDBusArgument9QMetaTypePv
 libQt6DBus.so.6:_ZN13QDBusMetaType15typeToSignatureE9QMetaType
 libQt6DBus.so.6:_ZN13QDBusMetaType25registerMarshallOperatorsE9QMetaTypePFvR13QDBusArgumentPKvEPFvRKS1_PvE
@@ -1618,6 +1627,7 @@ libm.so.6:round
 libm.so.6:sincosf
 libm.so.6:sqrt
 libm.so.6:sqrtf
+libm.so.6:trunc
 libpam.so.0:pam_authenticate
 libpam.so.0:pam_end
 libpam.so.0:pam_start_confdir
@@ -1630,6 +1640,7 @@ libpipewire-0.3.so.0:pw_init
 libpipewire-0.3.so.0:pw_link_state_as_string
 libpipewire-0.3.so.0:pw_loop_destroy
 libpipewire-0.3.so.0:pw_loop_new
+libpipewire-0.3.so.0:pw_properties_free
 libpipewire-0.3.so.0:pw_properties_new
 libpipewire-0.3.so.0:pw_proxy_destroy
 libpipewire-0.3.so.0:pw_stream_add_listener
