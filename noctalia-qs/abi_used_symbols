@@ -421,7 +421,7 @@ libQt6Core.so.6:_ZN9QMetaType8fromNameE14QByteArrayView
 libQt6Core.so.6:_ZN9QMetaTypeC1Ei
 libQt6Core.so.6:_ZN9QRunnableD2Ev
 libQt6Core.so.6:_ZN9QSaveFile6commitEv
-libQt6Core.so.6:_ZN9QSaveFileC1ERK7QString
+libQt6Core.so.6:_ZN9QSaveFileC1ERK7QStringP7QObject
 libQt6Core.so.6:_ZN9QtPrivate10findStringE13QLatin1Stringx11QStringViewN2Qt15CaseSensitivityE
 libQt6Core.so.6:_ZN9QtPrivate10startsWithE13QLatin1StringS0_N2Qt15CaseSensitivityE
 libQt6Core.so.6:_ZN9QtPrivate10startsWithE14QByteArrayViewS0_
@@ -1545,6 +1545,8 @@ libc.so.6:getpid
 libc.so.6:getpwnam_r
 libc.so.6:getpwuid_r
 libc.so.6:getuid
+libc.so.6:isprint
+libc.so.6:isspace
 libc.so.6:kill
 libc.so.6:memchr
 libc.so.6:memcmp
@@ -1568,7 +1570,6 @@ libc.so.6:strncpy
 libc.so.6:strtold
 libc.so.6:symlinkat
 libc.so.6:sysconf
-libc.so.6:vsnprintf
 libc.so.6:waitpid
 libc.so.6:write
 libdrm.so.2:drmFree
@@ -1675,6 +1676,7 @@ libstdc++.so.6:_ZNSo5flushEv
 libstdc++.so.6:_ZNSo5tellpEv
 libstdc++.so.6:_ZNSo9_M_insertIbEERSoT_
 libstdc++.so.6:_ZNSo9_M_insertIdEERSoT_
+libstdc++.so.6:_ZNSo9_M_insertImEERSoT_
 libstdc++.so.6:_ZNSolsEi
 libstdc++.so.6:_ZNSt10filesystem6statusERKNS_7__cxx114pathERSt10error_code
 libstdc++.so.6:_ZNSt10filesystem7__cxx114path14_M_split_cmptsEv
@@ -1687,7 +1689,10 @@ libstdc++.so.6:_ZNSt13basic_filebufIcSt11char_traitsIcEED1Ev
 libstdc++.so.6:_ZNSt13runtime_errorC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZNSt13runtime_errorD2Ev
 libstdc++.so.6:_ZNSt14basic_ifstreamIcSt11char_traitsIcEED1Ev
+libstdc++.so.6:_ZNSt15__exception_ptr13exception_ptr10_M_releaseEv
+libstdc++.so.6:_ZNSt15__exception_ptr13exception_ptr9_M_addrefEv
 libstdc++.so.6:_ZNSt16invalid_argumentC1EPKc
+libstdc++.so.6:_ZNSt16invalid_argumentC1ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZNSt16invalid_argumentD1Ev
 libstdc++.so.6:_ZNSt3_V215system_categoryEv
 libstdc++.so.6:_ZNSt5ctypeIcE2idE
@@ -1697,8 +1702,10 @@ libstdc++.so.6:_ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE15_M_replace
 libstdc++.so.6:_ZNSt7__cxx1115basic_stringbufIcSt11char_traitsIcESaIcEE7_M_syncEPcmm
 libstdc++.so.6:_ZNSt7__cxx1118basic_stringstreamIcSt11char_traitsIcESaIcEEC1Ev
 libstdc++.so.6:_ZNSt7__cxx1118basic_stringstreamIcSt11char_traitsIcESaIcEED1Ev
+libstdc++.so.6:_ZNSt7__cxx1119basic_istringstreamIcSt11char_traitsIcESaIcEED1Ev
 libstdc++.so.6:_ZNSt7__cxx1119basic_ostringstreamIcSt11char_traitsIcESaIcEEC1Ev
 libstdc++.so.6:_ZNSt7__cxx1119basic_ostringstreamIcSt11char_traitsIcESaIcEED1Ev
+libstdc++.so.6:_ZNSt7__cxx118numpunctIcE2idE
 libstdc++.so.6:_ZNSt8ios_baseC2Ev
 libstdc++.so.6:_ZNSt8ios_baseD2Ev
 libstdc++.so.6:_ZNSt9basic_iosIcSt11char_traitsIcEE4initEPSt15basic_streambufIcS1_E
@@ -1707,13 +1714,14 @@ libstdc++.so.6:_ZNSt9exceptionD2Ev
 libstdc++.so.6:_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l
 libstdc++.so.6:_ZSt16__throw_bad_castv
 libstdc++.so.6:_ZSt17__throw_bad_allocv
+libstdc++.so.6:_ZSt17current_exceptionv
+libstdc++.so.6:_ZSt17rethrow_exceptionNSt15__exception_ptr13exception_ptrE
 libstdc++.so.6:_ZSt18_Rb_tree_decrementPSt18_Rb_tree_node_base
 libstdc++.so.6:_ZSt18_Rb_tree_incrementPSt18_Rb_tree_node_base
 libstdc++.so.6:_ZSt19__throw_logic_errorPKc
 libstdc++.so.6:_ZSt20__throw_length_errorPKc
 libstdc++.so.6:_ZSt20__throw_out_of_rangePKc
 libstdc++.so.6:_ZSt21ios_base_library_initv
-libstdc++.so.6:_ZSt24__throw_invalid_argumentPKc
 libstdc++.so.6:_ZSt24__throw_out_of_range_fmtPKcz
 libstdc++.so.6:_ZSt25__throw_bad_function_callv
 libstdc++.so.6:_ZSt28_Rb_tree_rebalance_for_erasePSt18_Rb_tree_node_baseRS_
@@ -1724,12 +1732,13 @@ libstdc++.so.6:_ZSt4cout
 libstdc++.so.6:_ZSt7getlineIcSt11char_traitsIcESaIcEERSt13basic_istreamIT_T0_ES7_RNSt7__cxx1112basic_stringIS4_S5_T1_EES4_
 libstdc++.so.6:_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc
 libstdc++.so.6:_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_c
-libstdc++.so.6:_ZTISt12out_of_range
+libstdc++.so.6:_ZStrsIcSt11char_traitsIcESaIcEERSt13basic_istreamIT_T0_ES7_RNSt7__cxx1112basic_stringIS4_S5_T1_EE
 libstdc++.so.6:_ZTISt13runtime_error
 libstdc++.so.6:_ZTISt16invalid_argument
 libstdc++.so.6:_ZTISt9exception
 libstdc++.so.6:_ZTIv
 libstdc++.so.6:_ZTTNSt7__cxx1118basic_stringstreamIcSt11char_traitsIcESaIcEEE
+libstdc++.so.6:_ZTTNSt7__cxx1119basic_istringstreamIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZTTNSt7__cxx1119basic_ostringstreamIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZTTSt14basic_ifstreamIcSt11char_traitsIcEE
 libstdc++.so.6:_ZTVN10__cxxabiv117__class_type_infoE
@@ -1739,6 +1748,7 @@ libstdc++.so.6:_ZTVN10__cxxabiv120__si_class_type_infoE
 libstdc++.so.6:_ZTVN10__cxxabiv121__vmi_class_type_infoE
 libstdc++.so.6:_ZTVNSt7__cxx1115basic_stringbufIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZTVNSt7__cxx1118basic_stringstreamIcSt11char_traitsIcESaIcEEE
+libstdc++.so.6:_ZTVNSt7__cxx1119basic_istringstreamIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZTVNSt7__cxx1119basic_ostringstreamIcSt11char_traitsIcESaIcEEE
 libstdc++.so.6:_ZTVSt13basic_filebufIcSt11char_traitsIcEE
 libstdc++.so.6:_ZTVSt14basic_ifstreamIcSt11char_traitsIcEE
